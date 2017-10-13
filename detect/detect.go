@@ -30,6 +30,7 @@ func tryYAML(contents []byte) (filetype string, err error) {
 		return "", fmt.Errorf("FAILED to unmarshal YAML: %s", err)
 	}
 
+
 	return "json", nil
 }
 
@@ -41,6 +42,8 @@ func tryScript(contents []byte) (filetype string, err error) {
 		return "cloud-config", nil
 	}
 	if strings.HasPrefix(str, "#!") {
+		// TODO: perhaps bash script might look like "script:bash" ?
+		// ER, or should it be the mimetype.
 		return "script", nil
 	}
 	return "", fmt.Errorf("FAILED to detect a script file")
